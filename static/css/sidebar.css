@@ -1,0 +1,14 @@
+.sidebar {
+  position: sticky;
+  margin-top: 30px;
+  height: auto;
+  width: 100%;
+}
+
+.popular-tegs > ul {
+  list-style: none;
+}
+
+.members > ul {
+  list-style: none;
+}

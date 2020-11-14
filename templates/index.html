@@ -1,0 +1,16 @@
+{% extends 'include/base.html' %}
+{% load static %}
+
+{% block additional_css %}
+<link href="{% static 'css/firstPage.css' %}" rel="stylesheet">
+{% endblock additional_css %}
+
+{% block content %}
+<div class="card mb-3 question-box">
+    {% include 'include/question.html' %}
+</div>
+{% endblock content %}
+
+{% block pagination %}
+{% include 'include/pagination.html' %}
+{% endblock pagination %}
