@@ -2,19 +2,17 @@
 {% load static %}
 
 {% block additional_css %}
-<link href="{% static 'css/firstPage.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/firstPage.css' %}">
 <link rel="stylesheet" href="{% static 'css/score.css' %}">
 <link rel="stylesheet" href="{% static 'css/pagination.css' %}">
 {% endblock additional_css %}
 
 {% block content %}
-
-    {% for question in content %}
-    {% include 'include/question.html' with question=question %}
-    {% endfor %}
-
-{% endblock content %}
-
-{% block pagination %}
+<div class="container text-center mt-3">
+  <h1>#{{ tag }}</h1>
+</div>
+{% for q in content %}
+{% include 'include/question.html' with question=q %}
+{% endfor %}
 {% include 'include/pagination.html' %}
-{% endblock pagination %}
+{% endblock content %}

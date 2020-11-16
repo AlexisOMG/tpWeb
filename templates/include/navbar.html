@@ -1,6 +1,6 @@
 {% load static %}
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">AskSmth</a>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'home' %}">AskSmth</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -15,22 +15,27 @@
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
+            <div class="nav-item mr-4 mt-2 ml-auto">
+                <a href="{% url 'ask' %}" class="btn btn-outline-success my-2 my-sm-0">Ask!</a>
+            </div>
             <div class="w-auto d-flex flex-row">
                 <div>
                     <img class="avatar-img" src="{% static 'img/avatar.jpg' %}" alt="">
                 </div>
-                <div class="">
-                    <table class="user-block">
-                        <tr>
-                            <th>
-                                Nickname
-                            </th>
-                        </tr>
-                        <tr>
-                            <td>settings</td>
-                            <td>log out</td>
-                        </tr>
-                    </table>
+                <div class="nav-item dropdown mt-2">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                        User
+                    </a>
+                    <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                        {% if True %}
+                        <a class="dropdown-item" href="{% url 'settings' %}">Settings</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Logout</a>
+                        {% else %}
+                        <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,8 +1,10 @@
 .sidebar {
   position: sticky;
-  margin-top: 30px;
+  margin: 1em 0 2em 0;
   height: auto;
   width: 100%;
+  top: 10px;
+  max-height: 80%;
 }
 
 .popular-tegs > ul {

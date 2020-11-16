@@ -19,5 +19,11 @@ from askapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index)
+    path('', views.index, name = 'home'),
+    path('tag/<slug:tag>/', views.tag_question, name = 'tag'),
+    path('comments/<int:id>/', views.comments, name='comments'),
+    path('login/', views.login, name='login'),
+    path('register/', views.register, name='register'),
+    path('settings/', views.settings, name='settings'),
+    path('ask/', views.ask, name='ask')
 ]
