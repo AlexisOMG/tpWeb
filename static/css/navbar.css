@@ -1,6 +1,5 @@
 .avatar-img {
-  max-width: 50px;
-  max-height: 50px;
+  height: 50px;
 }
 
 .dropdown-item, #navbarDropdown {

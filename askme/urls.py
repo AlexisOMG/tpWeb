@@ -17,13 +17,24 @@ from django.contrib import admin
 from django.urls import path
 from askapp import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name = 'home'),
+    #path('hot', views.hot_questions, name='hot'),
     path('tag/<slug:tag>/', views.tag_question, name = 'tag'),
-    path('comments/<int:id>/', views.comments, name='comments'),
+    path('comments/<int:question_id>/', views.comments, name='comments'),
     path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
     path('register/', views.register, name='register'),
     path('settings/', views.settings, name='settings'),
     path('ask/', views.ask, name='ask')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns += staticfiles_urlpatterns()

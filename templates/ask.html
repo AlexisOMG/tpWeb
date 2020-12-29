@@ -1,6 +1,7 @@
 {% extends 'include/base.html' %}
 
 {% load static %}
+{% load bootstrap4 %}
 
 {% block additional_css %}
 <link rel="stylesheet" href="{% static 'css/ask.css' %}">
@@ -10,23 +11,15 @@
 {% block content %}
 <div class="question">
     <h1 class="text-center">New Question</h1>
-    <form action="#" method="POST">
-        <div class="form-group">
-            <label for="question_title">Title</label>
-            <input type="text" class="form-control" id="question_title"
-                placeholder="Write the short version of your question">
-        </div>
-        <div class="form-group">
-            <label for="question-body">Question</label>
-            <textarea class="form-control" name="question-body" id="question-body" rows="10"
-                placeholder="Ask something..."></textarea>
-        </div>
-        <div class="form-group">
-            <label for="question-tags">Tags</label>
-            <input type="text" class="form-control" id="question-tags"
-                placeholder="Attach some tags...">
-        </div>
+    <form action="{% url 'ask' %}" method="POST" class="form" novalidate>
+        {% csrf_token %}
+
+        {% bootstrap_form form %}
+
+        {% buttons %}
         <button type="submit" class="btn btn-primary btn-ask">Ask!</button>
+        {% endbuttons %}
+
     </form>
 </div>
 

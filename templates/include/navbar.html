@@ -5,8 +5,6 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-
-
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="d-flex justify-content-between w-100">
             <div class="ml-5">
@@ -15,29 +13,37 @@
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
+            <ul class="navbar-nav ml-auto">
             <div class="nav-item mr-4 mt-2 ml-auto">
                 <a href="{% url 'ask' %}" class="btn btn-outline-success my-2 my-sm-0">Ask!</a>
             </div>
             <div class="w-auto d-flex flex-row">
-                <div>
-                    <img class="avatar-img" src="{% static 'img/avatar.jpg' %}" alt="">
-                </div>
-                <div class="nav-item dropdown mt-2">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <img class="avatar-img"  src="{% if user.profile.avatar %}
+                    {{ user.profile.avatar.url }}
+                    {% else %}
+                    {% static 'img/avatar.jpg' %}
+                    {% endif %}" alt="{{ user.profile.nickname }}">
+                </li>
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                        User
+                        aria-haspopup="true" aria-expanded="false">
+                        {{ user.profile.nickname }}
                     </a>
                     <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-                        {% if True %}
                         <a class="dropdown-item" href="{% url 'settings' %}">Settings</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Logout</a>
-                        {% else %}
-                        <a class="dropdown-item" href="{% url 'login' %}">Login</a>
-                        {% endif %}
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                     </div>
-                </div>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="btn btn-info" href="{% url 'login' %}">Login</a>
+                </li>
+            {% endif %}
             </div>
+            </ul>
         </div>
     </div>
 </nav>

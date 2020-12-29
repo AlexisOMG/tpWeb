@@ -1,10 +1,10 @@
 <div class="col-md-3 sidebar">
     <div class="popular-tegs">
-        <h3>Popular Tegs</h3>
+        <h3>Popular Tags</h3>
         <hr>
         <ul>
-            {% for tag in tags %}
-            <li><a href="{% url 'tag' tag %}" class="sidebar-link">{{ tag }}</a></li>
+            {% for tag in all_tags %}
+            <li><a href="{% url 'tag' tag.tag %}" class="sidebar-link">{{ tag.tag }}</a></li>
             {% endfor %}
         </ul>
     </div>
@@ -12,9 +12,9 @@
         <h3>Best Members</h3>
         <hr>
         <ul>
-            <li><a href="#" class="sidebar-link">Member 1</a></li>
-            <li><a href="#" class="sidebar-link">Member 2</a></li>
-            <li><a href="#" class="sidebar-link">Member 3</a></li>
+            {% for person in best_members %}
+            <li><a href="#" class="sidebar-link">{{ person.nickname }}| Score: {{ person.score }}</a></li>
+            {% endfor %}
         </ul>
     </div>
 </div>

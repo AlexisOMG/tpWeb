@@ -1,6 +1,7 @@
 {% extends 'include/base.html' %}
 
 {% load static %}
+{% load bootstrap4 %}
 
 {% block additional_css %}
 <link rel="stylesheet" href="{% static 'css/comments.css' %}">
@@ -13,8 +14,11 @@
     <div class="jumbotron">
         <div class="row">
             <div class="col-md-4 d-flex flex-column">
-                <img class="avatar d-block" src="{% static 'img/avatar.jpg' %}"
-                alt="#">
+                {% if question.author.profile.avatar %}
+                <img src="{{ question.author.profile.avatar.url }}" class="avatar card-img" alt="#">
+                {% else %}
+                <img src="{% static 'img/avatar.jpg' %}" alt="#" class="avatar card-img">
+                {% endif %}
 
                 <div class="d-flex flex-row justify-content-around w-50 w-md-100 align-self-center mt-4">
                     <div class="row scores">
@@ -45,21 +49,20 @@
                 <hr class="my-4">
                 <div class="row d-flex flex-row mb-3">
                     <div class="col-md-10 d-flex flex-column flex-md-row justify-content-start">
-                        {% for t in question.tags %}
-                        <a class="mx-1" href="{% url 'tag' t %}">{{ t }}</a>
+                        {% for t in question.tags.all %}
+                        <a class="mx-1" href="{% url 'tag' t.tag %}">{{ t.tag }}</a>
                         {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
-        <form action="#" method="post">
-            <div class="form-group">
-                <label for="question-body">Your Answer</label>
-                <textarea class="form-control" name="question-body" id="question-body" rows="10"
-                placeholder="Enter your answer here..."></textarea>
-            </div>
-            <button type="submit" class="btn btn1 btn-primary">Answer</button>
-        </form>
+        <form action="{% url 'comments' question.pk %}" method="POST" class="mt-3" novalidate>
+        {% csrf_token %}
+        {% bootstrap_form form show_label=False %}
+        {% buttons %}
+        <button type="submit" class="btn btn-primary btn1">Answer</button>
+        {% endbuttons %}
+    </form>
     </div>
 </div>
 <div id="scrollable-element">
